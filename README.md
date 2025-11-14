@@ -43,7 +43,7 @@ FashionAI is a full-stack AI-powered fashion stylist designed to help users disc
 * Vercel (Frontend & Backend)  
 
 🌐 **Live Demo:**  
-[Live Demo Link](your-live-demo-link-here)  
+[Live Demo Link]([your-live-demo-link-here](https://www.linkedin.com/posts/samer-badawy-04a709346_ive-developed-fashionai-a-full-stack-activity-7395063093376077825-p9gG/?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAFaaMPoBglH9gh9AqHqnsOydFwUSDsoHnOc))  
 
 🚀 **Deployment Link:**  
 [Deployment Link](https://fashionai-main.vercel.app/)
