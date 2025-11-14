@@ -1,4 +1,4 @@
-// components/StyleBoard.jsx - FIXED VERSION with persistent likes and sorting
+// components/StyleBoard.jsx - MOBILE RESPONSIVE VERSION
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -193,8 +193,6 @@ const StyleBoard = ({ savedLooks, onSaveLook, onDeleteLook, wardrobe, onUpdateLo
     return randomEmojis[Math.floor(Math.random() * randomEmojis.length)];
   };
 
-
-
   const getCategoryEmoji = (category) => {
     // Ensure category is a string before calling toLowerCase()
     const safeCategory = category ? String(category) : '';
@@ -209,15 +207,15 @@ const StyleBoard = ({ savedLooks, onSaveLook, onDeleteLook, wardrobe, onUpdateLo
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
+    <div className="max-w-7xl mx-auto px-3 sm:px-4 py-6 sm:py-8">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-center mb-8"
+        className="text-center mb-6 sm:mb-8"
       >
-        <h1 className="text-4xl font-bold text-white mb-4">StyleBoard</h1>
-        <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4">StyleBoard</h1>
+        <p className="text-base sm:text-xl text-gray-300 max-w-2xl mx-auto px-2">
           Your personal gallery of {savedLooks.length} saved outfits and fashion inspiration
         </p>
       </motion.div>
@@ -227,13 +225,13 @@ const StyleBoard = ({ savedLooks, onSaveLook, onDeleteLook, wardrobe, onUpdateLo
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
-        className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4"
+        className="flex flex-col md:flex-row justify-between items-center mb-6 sm:mb-8 gap-3 sm:gap-4"
       >
         {/* Filters */}
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-1 sm:gap-2 justify-center sm:justify-start">
           <button
             onClick={() => setFilter('all')}
-            className={`px-4 py-2 rounded-xl font-medium transition-all ${
+            className={`px-3 sm:px-4 py-2 rounded-xl font-medium transition-all text-xs sm:text-sm ${
               filter === 'all' 
                 ? 'bg-purple-500 text-white' 
                 : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
@@ -246,7 +244,7 @@ const StyleBoard = ({ savedLooks, onSaveLook, onDeleteLook, wardrobe, onUpdateLo
             <button
               key={occasion}
               onClick={() => setFilter(occasion)}
-              className={`px-4 py-2 rounded-xl font-medium capitalize transition-all ${
+              className={`px-3 sm:px-4 py-2 rounded-xl font-medium capitalize transition-all text-xs sm:text-sm ${
                 filter === occasion 
                   ? 'bg-purple-500 text-white' 
                   : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
@@ -263,14 +261,14 @@ const StyleBoard = ({ savedLooks, onSaveLook, onDeleteLook, wardrobe, onUpdateLo
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           disabled={isSaving || wardrobe.length === 0}
-          className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-3 rounded-xl font-bold shadow-2xl flex items-center space-x-2 disabled:opacity-50"
+          className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-xl font-bold shadow-2xl flex items-center space-x-2 disabled:opacity-50 text-sm sm:text-base w-full sm:w-auto justify-center"
         >
           {isSaving ? (
             <>
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                className="w-4 h-4 border-2 border-white border-t-transparent rounded-full"
+                className="w-3 h-3 sm:w-4 sm:h-4 border-2 border-white border-t-transparent rounded-full"
               />
               <span>Saving...</span>
             </>
@@ -287,7 +285,7 @@ const StyleBoard = ({ savedLooks, onSaveLook, onDeleteLook, wardrobe, onUpdateLo
       {filteredLooks.length > 0 ? (
         <motion.div
           layout
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6"
         >
           <AnimatePresence>
             {filteredLooks.map((look, index) => {
@@ -301,66 +299,65 @@ const StyleBoard = ({ savedLooks, onSaveLook, onDeleteLook, wardrobe, onUpdateLo
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.8 }}
                   transition={{ delay: index * 0.1 }}
-                  whileHover={{ y: -5, scale: 1.02 }}
-                  className="bg-gray-900/80 backdrop-blur-lg rounded-2xl overflow-hidden border border-gray-800 cursor-pointer group"
+                  whileHover={{ y: -2, scale: 1.02 }}
+                  className="bg-gray-900/80 backdrop-blur-lg rounded-xl sm:rounded-2xl overflow-hidden border border-gray-800 cursor-pointer group relative"
                   onClick={() => setSelectedLook(look)}
                 >
                   {/* Look Image/Thumbnail */}
-                  <div className="h-48 bg-gradient-to-br from-purple-900/40 to-pink-900/40 relative overflow-hidden">
+                  <div className="h-40 sm:h-48 bg-gradient-to-br from-purple-900/40 to-pink-900/40 relative overflow-hidden">
                     <div className="absolute inset-0 flex items-center justify-center">
-                      <span className="text-6xl opacity-60">
+                      <span className="text-4xl sm:text-6xl opacity-60">
                         {getEmojiForLook(look)}
                       </span>
                     </div>
                     
-                    {/* Enhanced Quick Actions Overlay */}
-                    <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity flex space-x-2">
-                      {/* Fixed Like Button - No number, just heart */}
+                    {/* FIXED: Enhanced Quick Actions Overlay - Always visible on mobile */}
+                    <div className="absolute top-2 right-2 sm:top-3 sm:right-3 opacity-100 sm:opacity-0 group-hover:opacity-100 transition-opacity flex space-x-1 sm:space-x-2">
+                      {/* Fixed Like Button - Always visible on mobile */}
                       <button
                         onClick={(e) => toggleLike(look._id, e)}
-                        className={`bg-black/50 backdrop-blur-sm rounded-full p-2 transition-all ${
+                        className={`bg-black/70 backdrop-blur-sm rounded-full p-1.5 sm:p-2 transition-all ${
                           likedLooks.has(look._id) 
-                            ? 'text-red-500 bg-red-500/30' 
+                            ? 'text-red-500 bg-red-500/40' 
                             : 'text-white hover:bg-red-500/50'
                         }`}
                         title={likedLooks.has(look._id) ? "Unlike" : "Like"}
                       >
-                        ❤️
+                        <span className="text-sm sm:text-base">❤️</span>
                       </button>
-                      {/* Edit Button */}
+                      {/* Edit Button - Always visible on mobile */}
                       <button
                         onClick={(e) => startEditing(look, e)}
-                        className="bg-black/50 backdrop-blur-sm rounded-full p-2 text-white hover:bg-blue-500/50 transition-all"
+                        className="bg-black/70 backdrop-blur-sm rounded-full p-1.5 sm:p-2 text-white hover:bg-blue-500/50 transition-all"
                         title="Edit Look"
                       >
-                        ✏️
+                        <span className="text-sm sm:text-base">✏️</span>
                       </button>
-
                     </div>
 
                     {/* Mood Badge */}
-                    <div className="absolute top-3 left-3">
-                      <span className="bg-black/50 backdrop-blur-sm text-white px-2 py-1 rounded-full text-xs capitalize">
+                    <div className="absolute top-2 left-2 sm:top-3 sm:left-3">
+                      <span className="bg-black/70 backdrop-blur-sm text-white px-2 py-1 rounded-full text-xs capitalize">
                         {look.mood}
                       </span>
                     </div>
 
                     {/* Liked Badge - Shows when look is liked */}
                     {likedLooks.has(look._id) && (
-                      <div className="absolute bottom-3 left-3">
+                      <div className="absolute bottom-2 left-2 sm:bottom-3 sm:left-3">
                         <span className="bg-red-500/80 backdrop-blur-sm text-white px-2 py-1 rounded-full text-xs flex items-center space-x-1">
-                          <span>❤️</span>
-                          <span>Liked</span>
+                          <span className="text-xs">❤️</span>
+                          <span className="hidden xs:inline">Liked</span>
                         </span>
                       </div>
                     )}
                   </div>
 
                   {/* Look Details */}
-                  <div className="p-4">
+                  <div className="p-3 sm:p-4">
                     {editingLook === look._id ? (
                       // Edit Mode - Fixed to not open new tab
-                      <div className="space-y-3" onClick={(e) => e.stopPropagation()}>
+                      <div className="space-y-2 sm:space-y-3" onClick={(e) => e.stopPropagation()}>
                         <input
                           type="text"
                           value={editForm.title}
@@ -404,16 +401,16 @@ const StyleBoard = ({ savedLooks, onSaveLook, onDeleteLook, wardrobe, onUpdateLo
                     ) : (
                       // Display Mode
                       <>
-                        <h3 className="text-white font-bold text-lg mb-2 truncate">{look.title}</h3>
+                        <h3 className="text-white font-bold text-base sm:text-lg mb-2 truncate pr-8 sm:pr-12">{look.title}</h3>
                         
-                        <div className="space-y-1 mb-3">
+                        <div className="space-y-1 mb-2 sm:mb-3">
                           {allDisplayedItems.slice(0, 2).map((item) => (
-                            <p key={item._id} className="text-gray-400 text-sm truncate">
+                            <p key={item._id} className="text-gray-400 text-xs sm:text-sm truncate">
                               {getCategoryEmoji(item.category)} {item.name}
                             </p>
                           ))}
                           {allDisplayedItems.length > 2 && (
-                            <p className="text-gray-500 text-sm">+{allDisplayedItems.length - 2} more items</p>
+                            <p className="text-gray-500 text-xs sm:text-sm">+{allDisplayedItems.length - 2} more items</p>
                           )}
                         </div>
 
@@ -422,7 +419,7 @@ const StyleBoard = ({ savedLooks, onSaveLook, onDeleteLook, wardrobe, onUpdateLo
                           {look.tags && look.tags.slice(0, 2).map((tag, idx) => (
                             <span
                               key={idx}
-                              className="bg-purple-500/20 text-purple-300 px-2 py-1 rounded-lg text-xs"
+                              className="bg-purple-500/20 text-purple-300 px-2 py-1 rounded text-xs"
                             >
                               {tag}
                             </span>
@@ -440,19 +437,19 @@ const StyleBoard = ({ savedLooks, onSaveLook, onDeleteLook, wardrobe, onUpdateLo
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="text-center py-16"
+          className="text-center py-8 sm:py-16"
         >
-          <div className="text-6xl mb-4">📌</div>
-          <h3 className="text-2xl text-white mb-2">
+          <div className="text-4xl sm:text-6xl mb-4">📌</div>
+          <h3 className="text-lg sm:text-2xl text-white mb-2">
             {savedLooks.length === 0 ? 'No saved looks yet' : 'No looks match your filter'}
           </h3>
-          <p className="text-gray-400 mb-6">
+          <p className="text-gray-400 text-sm sm:text-base mb-4 sm:mb-6 px-4">
             {savedLooks.length === 0 
               ? 'Save your favorite AI-generated outfits to build your style collection!' 
               : 'Try changing your filter to see more looks.'}
           </p>
           {wardrobe.length === 0 && (
-            <p className="text-yellow-400 text-sm mb-4">
+            <p className="text-yellow-400 text-xs sm:text-sm mb-3 sm:mb-4">
               💡 Add items to your wardrobe first to create looks!
             </p>
           )}
@@ -461,7 +458,7 @@ const StyleBoard = ({ savedLooks, onSaveLook, onDeleteLook, wardrobe, onUpdateLo
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             disabled={wardrobe.length === 0}
-            className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-8 py-4 rounded-xl font-bold shadow-2xl disabled:opacity-50"
+            className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-bold shadow-2xl disabled:opacity-50 text-sm sm:text-base"
           >
             {wardrobe.length === 0 ? 'Add Wardrobe Items First' : 'Save Your First Look'}
           </motion.button>
@@ -475,72 +472,72 @@ const StyleBoard = ({ savedLooks, onSaveLook, onDeleteLook, wardrobe, onUpdateLo
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+            className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-3 sm:p-4"
             onClick={() => setSelectedLook(null)}
           >
             <motion.div
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}
-              className="bg-gray-900 border border-gray-800 rounded-3xl p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+              className="bg-gray-900 border border-gray-800 rounded-2xl sm:rounded-3xl p-4 sm:p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="flex justify-between items-start mb-6">
-                <h2 className="text-2xl font-bold text-white">{selectedLook.title}</h2>
+              <div className="flex justify-between items-start mb-4 sm:mb-6">
+                <h2 className="text-xl sm:text-2xl font-bold text-white pr-4">{selectedLook.title}</h2>
                 <button
                   onClick={() => setSelectedLook(null)}
-                  className="text-gray-400 hover:text-white text-2xl"
+                  className="text-gray-400 hover:text-white text-xl sm:text-2xl flex-shrink-0"
                 >
                   ×
                 </button>
               </div>
 
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
                 {/* Look Preview */}
-                <div className="bg-gradient-to-br from-purple-900/40 to-pink-900/40 rounded-2xl h-64 flex items-center justify-center">
-                  <span className="text-8xl opacity-60">
+                <div className="bg-gradient-to-br from-purple-900/40 to-pink-900/40 rounded-xl sm:rounded-2xl h-48 sm:h-64 flex items-center justify-center">
+                  <span className="text-6xl sm:text-8xl opacity-60">
                     {getEmojiForLook(selectedLook)}
                   </span>
                 </div>
 
                 {/* Look Details */}
-                <div className="space-y-4">
+                <div className="space-y-3 sm:space-y-4">
                   <div>
-                    <h3 className="text-white font-bold mb-2">Outfit Details</h3>
+                    <h3 className="text-white font-bold mb-2 text-sm sm:text-base">Outfit Details</h3>
                     {selectedLook.description && (
-                      <p className="text-gray-300 mb-3">{selectedLook.description}</p>
+                      <p className="text-gray-300 mb-3 text-sm sm:text-base">{selectedLook.description}</p>
                     )}
                     
-                    <h4 className="text-white font-bold mb-2">Outfit Items</h4>
+                    <h4 className="text-white font-bold mb-2 text-sm sm:text-base">Outfit Items</h4>
                     <div className="space-y-2">
                       {selectedLook.items && selectedLook.items.map((item) => (
-                        <div key={item._id} className="flex items-center space-x-3 bg-gray-800/50 rounded-xl p-3">
-                          <span className="text-purple-400">{getCategoryEmoji(item.category)}</span>
-                          <span className="text-white">{item.name}</span>
+                        <div key={item._id} className="flex items-center space-x-3 bg-gray-800/50 rounded-xl p-2 sm:p-3">
+                          <span className="text-purple-400 text-sm sm:text-base">{getCategoryEmoji(item.category)}</span>
+                          <span className="text-white text-sm sm:text-base">{item.name}</span>
                         </div>
                       ))}
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-2 gap-3 sm:gap-4">
                     <div>
-                      <h4 className="text-gray-400 text-sm mb-1">Mood</h4>
-                      <p className="text-white capitalize">{selectedLook.mood}</p>
+                      <h4 className="text-gray-400 text-xs sm:text-sm mb-1">Mood</h4>
+                      <p className="text-white capitalize text-sm sm:text-base">{selectedLook.mood}</p>
                     </div>
                     <div>
-                      <h4 className="text-gray-400 text-sm mb-1">Occasion</h4>
-                      <p className="text-white capitalize">{selectedLook.occasion}</p>
+                      <h4 className="text-gray-400 text-xs sm:text-sm mb-1">Occasion</h4>
+                      <p className="text-white capitalize text-sm sm:text-base">{selectedLook.occasion}</p>
                     </div>
                   </div>
 
                   {selectedLook.tags && selectedLook.tags.length > 0 && (
                     <div>
-                      <h4 className="text-gray-400 text-sm mb-2">Tags</h4>
-                      <div className="flex flex-wrap gap-2">
+                      <h4 className="text-gray-400 text-xs sm:text-sm mb-2">Tags</h4>
+                      <div className="flex flex-wrap gap-1 sm:gap-2">
                         {selectedLook.tags.map((tag, idx) => (
                           <span
                             key={idx}
-                            className="bg-purple-500/20 text-purple-300 px-3 py-1 rounded-lg text-sm capitalize"
+                            className="bg-purple-500/20 text-purple-300 px-2 sm:px-3 py-1 rounded text-xs sm:text-sm capitalize"
                           >
                             {tag}
                           </span>
@@ -550,13 +547,13 @@ const StyleBoard = ({ savedLooks, onSaveLook, onDeleteLook, wardrobe, onUpdateLo
                   )}
 
                   {/* Enhanced Actions */}
-                  <div className="flex space-x-3 pt-4">
+                  <div className="flex space-x-2 sm:space-x-3 pt-3 sm:pt-4">
                     {/* Fixed Like Button in Modal - No number */}
                     <motion.button
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                       onClick={(e) => toggleLike(selectedLook._id, e)}
-                      className={`flex-1 py-3 rounded-xl font-bold transition-all flex items-center justify-center space-x-2 ${
+                      className={`flex-1 py-2 sm:py-3 rounded-xl font-bold transition-all flex items-center justify-center space-x-1 sm:space-x-2 text-sm sm:text-base ${
                         likedLooks.has(selectedLook._id)
                           ? 'bg-red-500/30 text-red-300'
                           : 'bg-gray-800 text-white hover:bg-gray-700'
@@ -570,7 +567,7 @@ const StyleBoard = ({ savedLooks, onSaveLook, onDeleteLook, wardrobe, onUpdateLo
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                       onClick={() => deleteLook(selectedLook._id)}
-                      className="flex-1 bg-red-500/20 text-red-300 py-3 rounded-xl font-bold hover:bg-red-500/30 transition-all"
+                      className="flex-1 bg-red-500/20 text-red-300 py-2 sm:py-3 rounded-xl font-bold hover:bg-red-500/30 transition-all text-sm sm:text-base"
                     >
                       Delete
                     </motion.button>

@@ -48,24 +48,22 @@ const UserDropdown = ({ onLogout }) => {
     openUserProfile();
   };
 
-
-
   return (
     <div className="relative">
       <motion.button
         onClick={() => setIsOpen(!isOpen)}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        className="flex items-center space-x-4 bg-gray-800 hover:bg-gray-700 rounded-2xl px-5 py-3 transition-all border border-gray-700"
+        className="flex items-center space-x-2 sm:space-x-4 bg-gray-800 hover:bg-gray-700 rounded-2xl px-3 sm:px-5 py-2 sm:py-3 transition-all border border-gray-700 touch-manipulation"
       >
-        <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
-          <span className="text-white font-bold text-base">
+        <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
+          <span className="text-white font-bold text-sm sm:text-base">
             {clerkUser ? (clerkUser.firstName?.charAt(0) || clerkUser.username?.charAt(0) || 'U') : 'U'}
           </span>
         </div>
         
-        <div className="text-left hidden sm:block">
-          <div className="text-white font-semibold text-sm">
+        <div className="text-left hidden xs:block">
+          <div className="text-white font-semibold text-xs sm:text-sm">
             {getUserName()}
           </div>
           <div className="text-gray-400 text-xs">
@@ -75,7 +73,7 @@ const UserDropdown = ({ onLogout }) => {
 
         <motion.div
           animate={{ rotate: isOpen ? 180 : 0 }}
-          className="text-gray-400 ml-2"
+          className="text-gray-400 ml-1 sm:ml-2 text-xs sm:text-sm"
         >
           ▼
         </motion.div>
@@ -93,20 +91,20 @@ const UserDropdown = ({ onLogout }) => {
               initial={{ opacity: 0, scale: 0.95, y: -10 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: -10 }}
-              className="absolute right-0 top-full mt-3 w-64 bg-gray-900 border border-gray-800 rounded-2xl shadow-2xl z-50 overflow-hidden"
+              className="absolute right-0 top-full mt-2 sm:mt-3 w-72 xs:w-80 sm:w-64 bg-gray-900 border border-gray-800 rounded-2xl shadow-2xl z-50 overflow-hidden mx-2 sm:mx-0"
             >
-              <div className="p-4 border-b border-gray-800">
+              <div className="p-3 sm:p-4 border-b border-gray-800">
                 <div className="flex items-center space-x-3 mb-2">
-                  <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
-                    <span className="text-white font-bold text-lg">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
+                    <span className="text-white font-bold text-base sm:text-lg">
                       {clerkUser ? (clerkUser.firstName?.charAt(0) || clerkUser.username?.charAt(0) || 'U') : 'U'}
                     </span>
                   </div>
-                  <div className="flex-1">
-                    <div className="text-white font-semibold text-sm">
+                  <div className="flex-1 min-w-0">
+                    <div className="text-white font-semibold text-sm truncate">
                       {getUserName()}
                     </div>
-                    <div className="text-gray-400 text-xs">
+                    <div className="text-gray-400 text-xs truncate">
                       {getUserEmail()}
                     </div>
                   </div>
@@ -121,23 +119,24 @@ const UserDropdown = ({ onLogout }) => {
               <div className="p-2 space-y-1">
                 <motion.button
                   whileHover={{ scale: 1.02, x: 5 }}
-                  className="w-full flex items-center space-x-4 px-4 py-3 rounded-xl text-left transition-all text-gray-300 hover:bg-gray-800"
+                  whileTap={{ scale: 0.98 }}
+                  className="w-full flex items-center space-x-3 sm:space-x-4 px-3 sm:px-4 py-2 sm:py-3 rounded-xl text-left transition-all text-gray-300 hover:bg-gray-800 touch-manipulation"
                   onClick={handleProfileClick}
                 >
-                  <span className="text-xl">👤</span>
-                  <span className="font-medium text-base">Profile & Settings</span>
+                  <span className="text-lg sm:text-xl">👤</span>
+                  <span className="font-medium text-sm sm:text-base">Profile & Settings</span>
                 </motion.button>
-
               </div>
 
-              <div className="p-3 border-t border-gray-800">
+              <div className="p-2 sm:p-3 border-t border-gray-800">
                 <motion.button
                   onClick={handleLogout}
                   whileHover={{ scale: 1.02, x: 5 }}
-                  className="w-full flex items-center space-x-4 px-4 py-3 rounded-xl text-left transition-all text-red-400 hover:bg-red-500/20"
+                  whileTap={{ scale: 0.98 }}
+                  className="w-full flex items-center space-x-3 sm:space-x-4 px-3 sm:px-4 py-2 sm:py-3 rounded-xl text-left transition-all text-red-400 hover:bg-red-500/20 touch-manipulation"
                 >
-                  <span className="text-xl">🚪</span>
-                  <span className="font-medium text-base">Logout</span>
+                  <span className="text-lg sm:text-xl">🚪</span>
+                  <span className="font-medium text-sm sm:text-base">Logout</span>
                 </motion.button>
               </div>
             </motion.div>

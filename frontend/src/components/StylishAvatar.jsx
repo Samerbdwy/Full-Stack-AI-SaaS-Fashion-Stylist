@@ -85,9 +85,7 @@ const StylishAvatar = ({ mood }) => {
       </motion.p>
 
       {/* Label */}
-      <div className="absolute top-4 right-4 text-white/60 text-sm bg-black/30 px-3 py-1 rounded-full z-10">
-        AI Recommendation
-      </div>
+    
     </motion.div>
   );
 };

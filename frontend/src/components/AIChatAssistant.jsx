@@ -1,4 +1,4 @@
-// components/AIChatAssistant.jsx - COMPLETELY FIXED VERSION
+// components/AIChatAssistant.jsx - MOBILE RESPONSIVE VERSION
 import React, { useState, useRef, useEffect, useCallback, memo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import ReactMarkdown from 'react-markdown'
@@ -14,13 +14,13 @@ const MessageBubble = memo(({ message }) => {
       className={`flex ${message.isAI ? 'justify-start' : 'justify-end'}`}
     >
       <motion.div
-        className={`max-w-xs lg:max-w-md px-4 py-3 rounded-2xl ${
+        className={`max-w-[85%] xs:max-w-xs sm:max-w-sm md:max-w-md px-3 sm:px-4 py-2 sm:py-3 rounded-2xl ${
           message.isAI
             ? 'bg-gray-800 text-white rounded-bl-none'
             : 'bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-br-none'
         }`}
       >
-        <div className="whitespace-pre-wrap break-words message-content">
+        <div className="whitespace-pre-wrap break-words message-content text-sm sm:text-base">
           {message.isAI ? (
             <ReactMarkdown
               components={{
@@ -302,23 +302,23 @@ const AIChatAssistant = ({ onSendMessage, trendContext, onClearContext, userId }
   }, [handleSendMessage]);
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-4xl">
+    <div className="container mx-auto px-3 sm:px-4 py-4 sm:py-8 max-w-4xl">
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         className="bg-gray-900/80 backdrop-blur-lg rounded-3xl border border-gray-800 shadow-2xl overflow-hidden"
       >
         {/* Header */}
-        <div className="bg-gradient-to-r from-purple-900 to-pink-900 p-6">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
-                <span className="text-2xl">👗</span>
+        <div className="bg-gradient-to-r from-purple-900 to-pink-900 p-4 sm:p-6">
+          <div className="flex items-center justify-between flex-col sm:flex-row gap-4 sm:gap-0">
+            <div className="flex items-center space-x-3 sm:space-x-4">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-full flex items-center justify-center">
+                <span className="text-xl sm:text-2xl">👗</span>
               </div>
               <div>
-                <h2 className="text-2xl font-bold text-white">AI Fashion Stylist</h2>
+                <h2 className="text-xl sm:text-2xl font-bold text-white">AI Fashion Stylist</h2>
                 {trendContext && (
-                  <p className="text-purple-200 text-sm mt-1">
+                  <p className="text-purple-200 text-xs sm:text-sm mt-1 truncate max-w-[200px] sm:max-w-none">
                     💫 Discussing: {trendContext.split('"')[1]}
                   </p>
                 )}
@@ -329,7 +329,7 @@ const AIChatAssistant = ({ onSendMessage, trendContext, onClearContext, userId }
                 onClick={clearChat}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-white/20 text-white px-4 py-2 rounded-xl text-sm hover:bg-white/30 transition-all"
+                className="bg-white/20 text-white px-3 py-2 sm:px-4 sm:py-2 rounded-xl text-xs sm:text-sm hover:bg-white/30 transition-all"
               >
                 Clear Chat
               </motion.button>
@@ -340,7 +340,7 @@ const AIChatAssistant = ({ onSendMessage, trendContext, onClearContext, userId }
         {/* Messages */}
         <div 
           ref={messagesContainerRef}
-          className="h-96 overflow-y-auto p-6 space-y-4 relative"
+          className="h-64 sm:h-80 md:h-96 overflow-y-auto p-4 sm:p-6 space-y-3 sm:space-y-4 relative"
         >
           <AnimatePresence mode="popLayout">
             {messages.map((message) => (
@@ -354,23 +354,23 @@ const AIChatAssistant = ({ onSendMessage, trendContext, onClearContext, userId }
               animate={{ opacity: 1 }}
               className="flex justify-start"
             >
-              <div className="bg-gray-800 text-white px-4 py-3 rounded-2xl rounded-bl-none">
+              <div className="bg-gray-800 text-white px-3 sm:px-4 py-2 sm:py-3 rounded-2xl rounded-bl-none">
                 <div className="flex space-x-1 items-center">
-                  <span className="text-sm mr-2">AI is typing</span>
+                  <span className="text-xs sm:text-sm mr-2">AI is typing</span>
                   <motion.div
                     animate={{ scale: [1, 1.2, 1] }}
                     transition={{ duration: 1, repeat: Infinity, delay: 0 }}
-                    className="w-2 h-2 bg-white rounded-full"
+                    className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-white rounded-full"
                   />
                   <motion.div
                     animate={{ scale: [1, 1.2, 1] }}
                     transition={{ duration: 1, repeat: Infinity, delay: 0.2 }}
-                    className="w-2 h-2 bg-white rounded-full"
+                    className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-white rounded-full"
                   />
                   <motion.div
                     animate={{ scale: [1, 1.2, 1] }}
                     transition={{ duration: 1, repeat: Infinity, delay: 0.4 }}
-                    className="w-2 h-2 bg-white rounded-full"
+                    className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-white rounded-full"
                   />
                 </div>
               </div>
@@ -380,23 +380,23 @@ const AIChatAssistant = ({ onSendMessage, trendContext, onClearContext, userId }
         </div>
 
         {/* Quick Questions */}
-        <div className="border-t border-gray-800 p-4">
-          <div className="flex flex-wrap gap-2 mb-4">
+        <div className="border-t border-gray-800 p-3 sm:p-4">
+          <div className="flex flex-wrap gap-1 sm:gap-2 mb-3 sm:mb-4">
             {quickQuestions.map((question, index) => (
               <motion.button
                 key={index}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => handleQuickQuestion(question)}
-                className="bg-gray-800 text-white px-3 py-2 rounded-lg text-sm hover:bg-gray-700 transition-all"
+                className="bg-gray-800 text-white px-2 py-1.5 sm:px-3 sm:py-2 rounded-lg text-xs sm:text-sm hover:bg-gray-700 transition-all flex-shrink-0"
               >
                 {question}
               </motion.button>
             ))}
           </div>
           
-          {/* Input */}
-          <div className="flex space-x-4">
+          {/* Input - FIXED: Mobile responsive input area */}
+          <div className="flex flex-col xs:flex-row gap-2 xs:gap-3 sm:gap-4">
             <input
               ref={inputRef}
               type="text"
@@ -404,21 +404,21 @@ const AIChatAssistant = ({ onSendMessage, trendContext, onClearContext, userId }
               onChange={handleInputChange}
               onKeyPress={handleKeyPress}
               placeholder="Ask about outfits, styles, or occasions..."
-              className="flex-1 bg-gray-800 border border-gray-700 text-white rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors"
+              className="flex-1 bg-gray-800 border border-gray-700 text-white rounded-xl px-3 sm:px-4 py-2 sm:py-3 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors text-sm sm:text-base min-w-0"
             />
             <motion.button
               onClick={handleSendMessage}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               disabled={isTyping || inputMessage.trim() === ''}
-              className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-3 rounded-xl font-bold shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-2"
+              className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-xl font-bold shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-1 sm:space-x-2 min-w-[80px] sm:min-w-[100px]"
             >
-              <span>Send</span>
+              <span className="text-sm sm:text-base">Send</span>
               {isTyping && (
                 <motion.div
                   animate={{ rotate: 360 }}
                   transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                  className="w-4 h-4 border-2 border-white border-t-transparent rounded-full"
+                  className="w-3 h-3 sm:w-4 sm:h-4 border-2 border-white border-t-transparent rounded-full"
                 />
               )}
             </motion.button>
