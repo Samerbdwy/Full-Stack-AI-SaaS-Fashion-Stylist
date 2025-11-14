@@ -10,8 +10,13 @@ const devAuth = (req, res, next) => {
   next();
 };
 
-// For production, we use Clerk's requireAuth() directly
-// This file only exists to prevent import errors in development
-const clerkAuth = devAuth; // Use same as devAuth when Clerk not available
+let clerkAuth;
+
+if (process.env.CLERK_SECRET_KEY) {
+  const { requireAuth } = require('@clerk/clerk-sdk-node');
+  clerkAuth = requireAuth();
+} else {
+  clerkAuth = devAuth;
+}
 
 module.exports = { clerkAuth, devAuth };
