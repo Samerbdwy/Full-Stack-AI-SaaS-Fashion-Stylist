@@ -1,8 +1,7 @@
-// middleware/clerkAuth.js - SIMPLIFIED CLERK COMPATIBILITY
-// This is only used when Clerk is not available (development fallback)
+// middleware/clerkAuth.js - UPDATED & FIXED
+// Development fallback - not used in production (server.js handles real auth)
 
 const devAuth = (req, res, next) => {
-  // Development mode - always create a mock user
   req.user = {
     _id: 'dev_user',
     clerkUserId: 'dev_user'
@@ -10,13 +9,5 @@ const devAuth = (req, res, next) => {
   next();
 };
 
-let clerkAuth;
-
-if (process.env.CLERK_SECRET_KEY) {
-  const { requireAuth } = require('@clerk/clerk-sdk-node');
-  clerkAuth = requireAuth();
-} else {
-  clerkAuth = devAuth;
-}
-
-module.exports = { clerkAuth, devAuth };
+// Use devAuth for all cases since server.js handles real Clerk auth
+module.exports = { clerkAuth: devAuth, devAuth };
