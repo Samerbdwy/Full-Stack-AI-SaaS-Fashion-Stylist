@@ -85,7 +85,7 @@ const UserDropdown = ({ onLogout }) => {
               initial={{ opacity: 0, scale: 0.95, y: -10 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: -10 }}
-              className="absolute left-0 right-0 mx-4 sm:left-auto sm:right-0 sm:mx-0 top-full mt-2 w-auto sm:w-64 bg-gray-900 border border-gray-800 rounded-2xl shadow-2xl z-50 overflow-hidden"
+              className="fixed sm:absolute left-4 right-4 sm:left-auto sm:right-0 top-20 sm:top-full mt-2 bg-gray-900 border border-gray-800 rounded-2xl shadow-2xl z-50 overflow-hidden"
             >
               <div className="p-4 border-b border-gray-800">
                 <div className="flex items-center space-x-3 mb-2">
