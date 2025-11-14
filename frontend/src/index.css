@@ -1,0 +1,114 @@
+@import "tailwindcss";
+
+/* Premium Animated Scrollbar */
+::-webkit-scrollbar {
+  width: 14px;
+}
+
+::-webkit-scrollbar-track {
+  background: 
+    radial-gradient(circle at center, #1F2937 0%, #000000 100%),
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 5px,
+      #374151 5px,
+      #374151 10px
+    );
+  border-radius: 12px;
+  border: 1px solid #374151;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(45deg, #8B5CF6, #EC4899, #F59E0B);
+  border-radius: 12px;
+  border: 2px solid #000000;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 
+    0 0 20px rgba(139, 92, 246, 0.6),
+    inset 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+::-webkit-scrollbar-thumb::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  animation: scrollbarShine 3s infinite;
+}
+
+@keyframes scrollbarShine {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(45deg, #EC4899, #F59E0B, #8B5CF6);
+  box-shadow: 
+    0 0 25px rgba(236, 72, 153, 0.8),
+    inset 0 0 15px rgba(255, 255, 255, 0.3);
+  transform: scale(1.05);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: linear-gradient(45deg, #F59E0B, #8B5CF6, #EC4899);
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+}
+
+::-webkit-scrollbar-corner {
+  background: #000000;
+}
+
+/* Firefox Support */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #8B5CF6 #000000;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background-color: black;
+  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  overflow-x: hidden;
+}
+
+/* Scrollbar for specific containers */
+.scrollbar-custom {
+  scrollbar-width: thin;
+  scrollbar-color: #8B5CF6 #1F2937;
+}
+
+.scrollbar-custom::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollbar-custom::-webkit-scrollbar-track {
+  background: #1F2937;
+  border-radius: 4px;
+}
+
+.scrollbar-custom::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #8B5CF6, #EC4899);
+  border-radius: 4px;
+}
