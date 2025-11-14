@@ -30,7 +30,8 @@ FashionAI is a full-stack AI-powered fashion stylist designed to help users disc
 
 **Backend:**  
 * Node.js  
-* Express.js  
+* Express.js
+* Javascript
 * MongoDB (Mongoose)  
 * OpenAI/Gemini (AI Styling Engine)
 * OpenWeatherMap API 
