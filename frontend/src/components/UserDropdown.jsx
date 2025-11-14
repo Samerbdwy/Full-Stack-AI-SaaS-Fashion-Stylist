@@ -8,12 +8,6 @@ const UserDropdown = ({ onLogout }) => {
   const { signOut, openUserProfile } = useClerk();
   const { has, isLoaded: isAuthLoaded } = useAuth();
 
-  // Diagnostic log
-  if (isAuthLoaded) {
-    console.log('Auth loaded. User object:', clerkUser);
-    console.log('Checking for trend_explorer plan. Result:', has({ plan: 'trend_explorer' }));
-  }
-
   const hasTrendExplorer = has({ plan: 'trend_explorer' });
 
   let planStatus = 'Free Plan';
@@ -91,12 +85,12 @@ const UserDropdown = ({ onLogout }) => {
               initial={{ opacity: 0, scale: 0.95, y: -10 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: -10 }}
-              className="absolute right-0 top-full mt-2 sm:mt-3 w-72 xs:w-80 sm:w-64 bg-gray-900 border border-gray-800 rounded-2xl shadow-2xl z-50 overflow-hidden mx-2 sm:mx-0"
+              className="absolute left-0 right-0 mx-4 sm:left-auto sm:right-0 sm:mx-0 top-full mt-2 w-auto sm:w-64 bg-gray-900 border border-gray-800 rounded-2xl shadow-2xl z-50 overflow-hidden"
             >
-              <div className="p-3 sm:p-4 border-b border-gray-800">
+              <div className="p-4 border-b border-gray-800">
                 <div className="flex items-center space-x-3 mb-2">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
-                    <span className="text-white font-bold text-base sm:text-lg">
+                  <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
+                    <span className="text-white font-bold text-lg">
                       {clerkUser ? (clerkUser.firstName?.charAt(0) || clerkUser.username?.charAt(0) || 'U') : 'U'}
                     </span>
                   </div>
@@ -118,25 +112,25 @@ const UserDropdown = ({ onLogout }) => {
 
               <div className="p-2 space-y-1">
                 <motion.button
-                  whileHover={{ scale: 1.02, x: 5 }}
+                  whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="w-full flex items-center space-x-3 sm:space-x-4 px-3 sm:px-4 py-2 sm:py-3 rounded-xl text-left transition-all text-gray-300 hover:bg-gray-800 touch-manipulation"
+                  className="w-full flex items-center space-x-4 px-4 py-3 rounded-xl text-left transition-all text-gray-300 hover:bg-gray-800 touch-manipulation"
                   onClick={handleProfileClick}
                 >
-                  <span className="text-lg sm:text-xl">👤</span>
-                  <span className="font-medium text-sm sm:text-base">Profile & Settings</span>
+                  <span className="text-xl">👤</span>
+                  <span className="font-medium text-base">Profile & Settings</span>
                 </motion.button>
               </div>
 
-              <div className="p-2 sm:p-3 border-t border-gray-800">
+              <div className="p-3 border-t border-gray-800">
                 <motion.button
                   onClick={handleLogout}
-                  whileHover={{ scale: 1.02, x: 5 }}
+                  whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="w-full flex items-center space-x-3 sm:space-x-4 px-3 sm:px-4 py-2 sm:py-3 rounded-xl text-left transition-all text-red-400 hover:bg-red-500/20 touch-manipulation"
+                  className="w-full flex items-center space-x-4 px-4 py-3 rounded-xl text-left transition-all text-red-400 hover:bg-red-500/20 touch-manipulation"
                 >
-                  <span className="text-lg sm:text-xl">🚪</span>
-                  <span className="font-medium text-sm sm:text-base">Logout</span>
+                  <span className="text-xl">🚪</span>
+                  <span className="font-medium text-base">Logout</span>
                 </motion.button>
               </div>
             </motion.div>

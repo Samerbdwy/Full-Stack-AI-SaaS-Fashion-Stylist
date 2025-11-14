@@ -1,4 +1,4 @@
-// MoodStylist.jsx - FIXED VERSION with proper mood handling
+// MoodStylist.jsx - MOBILE RESPONSIVE VERSION
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 
@@ -168,11 +168,11 @@ const MoodStylist = ({ onMoodSelect, currentMood, onGenerateOutfit }) => {
   };
 
   return (
-    <div className="bg-gray-900 rounded-2xl p-8 border border-gray-800 shadow-lg">
-      <h2 className="text-2xl font-bold text-white mb-6">Mood Stylist</h2>
+    <div className="bg-gray-900 rounded-2xl p-4 sm:p-8 border border-gray-800 shadow-lg">
+      <h2 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6">Mood Stylist</h2>
 
       {/* Mood Selection */}
-      <div className="grid grid-cols-5 gap-2 mb-8">
+      <div className="grid grid-cols-3 sm:grid-cols-5 gap-2 mb-6 sm:mb-8">
         {moods.map((mood) => {
           const isActive = currentMood === mood.label.toLowerCase();
           return (
@@ -181,22 +181,22 @@ const MoodStylist = ({ onMoodSelect, currentMood, onGenerateOutfit }) => {
               onClick={() => onMoodSelect(mood.label.toLowerCase())}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className={`flex flex-col items-center p-3 rounded-xl transition-all font-medium ${
+              className={`flex flex-col items-center p-2 sm:p-3 rounded-xl transition-all font-medium ${
                 isActive
                   ? 'bg-white text-black shadow-md'
                   : 'bg-gray-800 text-white hover:bg-gray-700'
               }`}
             >
-              <span className="text-2xl">{mood.emoji}</span>
-              <span className="text-xs mt-1">{mood.label}</span>
+              <span className="text-xl sm:text-2xl">{mood.emoji}</span>
+              <span className="text-xs mt-1 text-center leading-tight">{mood.label}</span>
             </motion.button>
           );
         })}
       </div>
 
       {/* Current Mood Display */}
-      <div className="bg-gray-800 rounded-xl p-6 mb-6">
-        <h3 className="text-white font-bold text-lg mb-2">
+      <div className="bg-gray-800 rounded-xl p-4 sm:p-6 mb-4 sm:mb-6">
+        <h3 className="text-white font-bold text-base sm:text-lg mb-2">
           {currentMoodData.emoji} {currentMoodData.label} Look
         </h3>
         <p className="text-gray-400 text-sm">
@@ -223,7 +223,7 @@ const MoodStylist = ({ onMoodSelect, currentMood, onGenerateOutfit }) => {
           animate={{ opacity: 1, y: 0 }}
           className="bg-purple-500/20 border border-purple-500/30 rounded-xl p-4 mb-4"
         >
-          <h4 className="text-white font-bold mb-2">✨ {generatedOutfit.title}</h4>
+          <h4 className="text-white font-bold mb-2 text-sm sm:text-base">✨ {generatedOutfit.title}</h4>
           <p className="text-purple-200 text-sm mb-3">{generatedOutfit.description}</p>
           <div className="space-y-2">
             {generatedOutfit.items.map((item, index) => (
@@ -254,7 +254,7 @@ const MoodStylist = ({ onMoodSelect, currentMood, onGenerateOutfit }) => {
       <motion.button
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
-        className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white py-4 rounded-xl font-bold text-lg hover:opacity-90 transition-all disabled:opacity-50 flex items-center justify-center"
+        className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white py-3 sm:py-4 rounded-xl font-bold text-base sm:text-lg hover:opacity-90 transition-all disabled:opacity-50 flex items-center justify-center"
         onClick={handleGenerateOutfit}
         disabled={isGenerating}
       >
@@ -263,12 +263,12 @@ const MoodStylist = ({ onMoodSelect, currentMood, onGenerateOutfit }) => {
             <motion.div
               animate={{ rotate: 360 }}
               transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-              className="w-5 h-5 border-2 border-white border-t-transparent rounded-full mr-2"
+              className="w-4 h-4 sm:w-5 sm:h-5 border-2 border-white border-t-transparent rounded-full mr-2"
             />
-            Generating {currentMoodData.label} Outfit...
+            <span className="text-sm sm:text-base">Generating {currentMoodData.label} Outfit...</span>
           </>
         ) : (
-          `Generate ${currentMoodData.label} Outfit`
+          <span className="text-sm sm:text-base">Generate {currentMoodData.label} Outfit</span>
         )}
       </motion.button>
 
